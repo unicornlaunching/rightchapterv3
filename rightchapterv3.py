@@ -5,7 +5,7 @@ import openai
 def chapterize_text(text):
     try:
         response = openai.Completion.create(
-            model="text-davinci-004",  # Use the latest GPT-4 model
+            model="gpt-3.5-turbo-instruct",  # Use the latest GPT-4 model
             prompt=f"Create a chapter from the following text with a title, a quote related to the chapter, and the body of the chapter:\n\n{text}",
             max_tokens=500  # You can adjust the max tokens as needed
         )
