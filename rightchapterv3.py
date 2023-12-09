@@ -1,15 +1,14 @@
 import streamlit as st
 import openai
 
-# Function to generate chapterized text
+# Function to generate chapterized text using the new OpenAI API
 def chapterize_text(text):
     try:
-        response = openai.Completion.create(
-            model="gpt-3.5-turbo-instruct",  # Use the latest GPT-4 model
-            prompt=f"Create a chapter from the following text with a title, a quote related to the chapter, and the body of the chapter:\n\n{text}",
-            max_tokens=500  # You can adjust the max tokens as needed
+        response = openai.ChatCompletion.create(
+            model="gpt-4.0-turbo",  # Using the latest model suitable for chat-like interactions
+            messages=[{"role": "user", "content": f"Create a chapter from the following text with a title, a quote related to the chapter, and the body of the chapter:\n\n{text}"}]
         )
-        return response.choices[0].text.strip()
+        return response['choices'][0]['message']['content']
     except Exception as e:
         return f"An error occurred: {str(e)}"
 
